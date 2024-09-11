@@ -6,6 +6,9 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import java.sql.Driver;
+import java.util.List;
+
 public class LinkTest {
     WebDriver driver;
 
@@ -30,8 +33,32 @@ public class LinkTest {
         System.out.println("This link i going to" + path);
 
         //Am I broken link?
+        WebElement BrokenLink = driver.findElement(By.partialLinkText("Broken"));
+        BrokenLink.click();
+
+        String title = driver.getTitle();
+        if (title.contains("404")){
+            System.out.println("The Link is Broken");
+        }
+        else{
+            System.out.println("The Link not Broken");
+        }
+        driver.navigate().back();
+
         //Duplicate Link
+        WebElement homeLink1 = driver.findElement(By.linkText("Go to Dashboard"));
+        homeLink1.click();
+
+
         //Count Links
+        List<WebElement>  CountFullPageLink = driver.findElements(By.tagName("a"));
+        int PageLinkCount = CountFullPageLink.size();
+        System.out.println("Count of Full page Links: "+ PageLinkCount);
+
         //Count Layout Links
+        WebElement LayOutElement = driver.findElement(By.className("layout-main-content"));
+        List<WebElement> CountofLayOutElement = LayOutElement.findElements(By.tagName("a"));
+        System.out.println("Count of Layout Links: "+ CountofLayOutElement.size());
+
     }
 }
