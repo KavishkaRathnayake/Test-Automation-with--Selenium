@@ -57,5 +57,21 @@ public class DropdownTest {
 
 
     //2.Google search = pick a value from suggestions
+    @Test
+    public void GoogleSearchDropdown() throws InterruptedException {
+        driver.get("https://www.google.com/");
+        WebElement SearchBox = driver.findElement(By.xpath("//textarea[@class='gLFyf']"));
+        SearchBox.sendKeys("Virat Kohli");
+        Thread.sleep(2000);
+
+        List<WebElement> GoogleSearchList =  driver.findElements(By.xpath("//ul[@role='listbox']/li//div[@role='presentation']"));
+        System.out.println(GoogleSearchList.size());
+
+        for (WebElement Element:GoogleSearchList){
+            System.out.println(Element.getText());
+        }
+
+
+    }
     //3. Handle hidden auto suggestions dropdown and search using DOM Debugger (Trick)
 }
