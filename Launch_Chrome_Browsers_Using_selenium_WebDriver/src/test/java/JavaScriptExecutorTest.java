@@ -51,6 +51,12 @@ public class JavaScriptExecutorTest {
 
         scrollPage();
 
+        //06).Refresh page
+        jsexecutor.executeScript("location.reload();");
+
+        //07).Zoom the page
+        jsexecutor.executeScript("document.body.style.zoom='150%oo1'");
+
     }
 
     public void scrollPage() throws InterruptedException {
@@ -73,5 +79,8 @@ public class JavaScriptExecutorTest {
         WebElement scrolltoelement =  driver.findElement(By.xpath("//label[text()='Gender:']"));
         jsexecutor.executeScript("arguments[0].scrollIntoView(true);", scrolltoelement);
 
+        driver.quit();
+
     }
+
 }
